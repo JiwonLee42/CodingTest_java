@@ -6,16 +6,22 @@ class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
-        ArrayList<Double> scores = new ArrayList<>();
+        double[] scores = new double[n];
+        double maxScore = 0.0, sum = 0.0;
         for(int i = 0;i<n;i++){
-            scores.add(Double.parseDouble(st.nextToken()));
+            scores[i] = Double.parseDouble(st.nextToken());
+            if(scores[i] > maxScore) {
+                maxScore = scores[i];
+            }
         }
-        Collections.sort(scores);
-        Double m = scores.get(n-1);
-        Double sum = 0.0;
-        for(int i = 0;i<n;i++){
-            sum+=scores.get(i) / m * 100;
+        for (int i = 0; i<n; i++){
+            sum+= (scores[i] / maxScore) * 100;
         }
-        System.out.println(sum / n);
+
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        bw.write(String.valueOf(sum / n));
+        bw.newLine();
+        bw.flush();
+        bw.close();
     }
 }
