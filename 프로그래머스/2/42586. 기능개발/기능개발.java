@@ -4,7 +4,7 @@ class Solution {
     public int[] solution(int[] progresses, int[] speeds) {
         int[] answer = {};
         List<Integer> list = new ArrayList<>();
-        Queue<Integer> q = new LinkedList<>();
+        Queue<Integer> q = new ArrayDeque<>();
         int n = progresses.length;
         
         for(int i = 0; i < n;i++){
