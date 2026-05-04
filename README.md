@@ -43,4 +43,12 @@
 |  |
 | ------- |
 | [0134-gas-station](https://github.com/JiwonLee42/CodingTest_java/tree/master/0134-gas-station) |
+## Two Pointers
+|  |
+| ------- |
+| [0125-valid-palindrome](https://github.com/JiwonLee42/CodingTest_java/tree/master/0125-valid-palindrome) |
+## String
+|  |
+| ------- |
+| [0125-valid-palindrome](https://github.com/JiwonLee42/CodingTest_java/tree/master/0125-valid-palindrome) |
 <!---LeetCode Topics End-->
