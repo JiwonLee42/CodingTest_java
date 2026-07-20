@@ -7,7 +7,9 @@ class Solution {
     }
 
     void dfs(int k, int[][] dungeons, boolean[] visited, int count) {
-        answer = Math.max(answer, count);
+        if (count > answer) answer = count;
+        if (answer == dungeons.length) return;   // 이미 전탐 성공, 가지치기
+
         for (int i = 0; i < dungeons.length; i++) {
             if (!visited[i] && k >= dungeons[i][0]) {
                 visited[i] = true;
