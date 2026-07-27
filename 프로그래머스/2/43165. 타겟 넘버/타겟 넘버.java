@@ -1,20 +1,17 @@
 class Solution {
-    static int count = 0;
+    static int answer = 0;
     public int solution(int[] numbers, int target) {
-        dfs(numbers,0,0,target);
-        return count;
+        dfs(target,0,0,numbers);
+        return answer;
     }
     
-    public static void dfs(int[] numbers, int index, int sum, int target){
-        // 종료 조건 설정
-        if (index == numbers.length){
-            if(sum == target){
-                count++;
-            }
+    static void dfs(int target,int curIndex, int curSum, int[] numbers){
+        if(curIndex == numbers.length) {
+            if(curSum == target) answer++;
             return;
         }
+        dfs(target,curIndex+1,curSum-numbers[curIndex],numbers);
+        dfs(target,curIndex+1,curSum+numbers[curIndex],numbers);
         
-        dfs(numbers, index+1, sum + numbers[index], target);
-        dfs(numbers, index+1, sum - numbers[index], target);
     }
 }
