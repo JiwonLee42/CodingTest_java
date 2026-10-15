@@ -3,34 +3,37 @@ import java.util.*;
 class Solution {
     public int solution(String begin, String target, String[] words) {
         int answer = 0;
-        boolean [] visited = new boolean[words.length];
-        List<String> current = new ArrayList<>();
-        current.add(begin);
-        int depth = 0;
-        while(!current.isEmpty()){
-            // 다음 단어 도달 단어 모으기
-            List<String> nextWords = new ArrayList<>();
-            for(String cur : current){ // 현재 단계 단어 돌기
-                if(cur.equals(target)) return depth;
-                for(int i = 0;i<words.length;i++){
-                    if(!visited[i] && canConvert(cur,words[i])){
-                        visited[i] = true;
-                        nextWords.add(words[i]);
-                    }
-                }
+        int[] dist = new int[words.length];
+        Queue<Integer> q = new ArrayDeque<>();
+        
+        for (int i = 0; i < words.length; i++) {
+            if (diffOne(begin, words[i])) {
+                dist[i] = 1;
+                q.offer(i);
             }
-            current = nextWords;
-            depth++;
         }
         
-        return answer;
-    }
-    boolean canConvert(String a, String b) {
-        int diffCount = 0;
-        for(int i = 0; i < a.length();i++){
-            if(a.charAt(i) != b.charAt(i)) diffCount++;
+        while(!q.isEmpty()){
+            int now = q.poll();
+            if(words[now].equals(target)) return dist[now];
+            for(int i = 0; i < words.length;i++){
+                if(dist[i] != 0) continue;
+                if(diffOne(words[now],words[i])) {
+                    dist[i] = dist[now] + 1;
+                    q.offer(i);
+                }
+            }
         }
-        return diffCount == 1;
+        
+        
+        return 0;
     }
     
+    boolean diffOne(String a, String b) {
+        int diff = 0;
+        for (int j = 0; j < a.length(); j++) {
+            if (a.charAt(j) != b.charAt(j)) diff++;
+        }
+        return diff == 1;
+    }
 }
