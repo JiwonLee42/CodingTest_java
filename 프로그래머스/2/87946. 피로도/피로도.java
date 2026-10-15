@@ -1,20 +1,25 @@
+import java.util.*;
+
 class Solution {
-    int answer = 0;
-
+    static int max = 0;
     public int solution(int k, int[][] dungeons) {
-        dfs(k, dungeons, new boolean[dungeons.length], 0);
-        return answer;
+        max = 0;
+        boolean[] visited = new boolean[dungeons.length];
+        dfs(visited,dungeons,k,max);
+        return max;
     }
-
-    void dfs(int k, int[][] dungeons, boolean[] visited, int count) {
-        if (count > answer) answer = count;
-        if (answer == dungeons.length) return;   // 이미 전탐 성공, 가지치기
-
-        for (int i = 0; i < dungeons.length; i++) {
-            if (!visited[i] && k >= dungeons[i][0]) {
+    
+    void dfs(boolean [] visited, int[][] arr, int hp, int count){
+        for(int i = 0; i < arr.length;i++){
+            if(!visited[i] && arr[i][0] <= hp){
                 visited[i] = true;
-                dfs(k - dungeons[i][1], dungeons, visited, count + 1);
-                visited[i] = false;
+                hp-=arr[i][1];
+                count++;
+                if (count > max) max = count;
+                dfs(visited,arr,hp,count);
+                visited[i] = false; 
+                count--;
+                hp+=arr[i][1];
             }
         }
     }
